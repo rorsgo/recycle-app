@@ -10,6 +10,7 @@ const itemsController = new ItemsController();
 routes.get("/items", itemsController.listItems);
 
 routes.post("/points", pointsController.create);
+routes.get("/points/:id", pointsController.show);
 
 routes.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
 
