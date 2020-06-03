@@ -4,15 +4,14 @@ import knex from "../database/connection";
 class PointsController {
 
   async listPoints(request: Request, response: Response) {
-    const { country, state, city, items } = request.query;
+    const { state, city, items } = request.query;
     const parsedItems = String(items)
     .split(',')
     .map(item => Number(item.trim()));
 
     const points = await knex("points")
-    .join("point_items", "point_id", "=", "point_items.point_id")
+    .join("point_items", "points.id", "=", "point_items.point_id")
     .whereIn("point_items.item_id", parsedItems)
-    .where("country", String(country))
     .where("state", String(state))
     .where("city", String(city))
     .distinct()
@@ -32,9 +31,10 @@ class PointsController {
     }
 
     const items = await knex("items")
-      .join("point_items", "item_id", "=", "point_items.item_id")
+      .join("point_items", "items.id", "=", "point_items.item_id")
       .where("point_items.point_id", id)
       .select("items.title");
+      
 
     return response.json({
       point,
@@ -47,9 +47,8 @@ class PointsController {
       // image,
       name,
       email,
-      country,
-      city,
       state,
+      city,
       latitude,
       longitude,
       items
@@ -60,9 +59,8 @@ class PointsController {
       image: "image",
       name,
       email,
-      country,
-      city,
       state,
+      city,
       latitude,
       longitude
     }
