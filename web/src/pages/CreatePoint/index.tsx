@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { Map, TileLayer, Marker } from "react-leaflet";
+import api from "../../services/api";
+
+interface Item {
+  id: number;
+  title: string;
+  image_url: string;
+}
 
 const CreatePoint = () => {
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    api.get("items")
+      .then(response => {
+        setItems(response.data);
+      })
+  }, []);
   return (
     <div id="page-create-point">
       <header>
@@ -23,7 +38,7 @@ const CreatePoint = () => {
             <h2>Data</h2>
             <div className="field">
               <label htmlFor="entity-name">Entity name</label>
-              <input 
+              <input
                 type="text"
                 name="entity-name"
                 id="entity-name"
@@ -31,7 +46,7 @@ const CreatePoint = () => {
             </div>
             <div className="field">
               <label htmlFor="email">E-mail</label>
-              <input 
+              <input
                 type="text"
                 name="email"
                 id="email"
@@ -46,10 +61,10 @@ const CreatePoint = () => {
             <span>Select the map address</span>
           </legend>
           <Map center={[-23.5630994, -46.6565712]} zoom={15}>
-            <TileLayer 
+            <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <Marker position={[-23.5630994, -46.6565712]}/>
+            <Marker position={[-23.5630994, -46.6565712]} />
           </Map>
           <div className="field-group">
             <div className="field">
@@ -73,30 +88,12 @@ const CreatePoint = () => {
             <span>Select one or more items below</span>
           </legend>
           <ul className="items-grid">
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oil.svg" alt="Kicthen Oil"/>
-              <span>Kicthen Oil</span>
-            </li>
+            {items.map(item => (
+              <li key={item.id}>
+                <img src={item.image_url} alt={item.title} />
+                <span>{item.title}</span>
+              </li>
+            ))}
           </ul>
         </fieldset>
         <button type="submit">Register point</button>
