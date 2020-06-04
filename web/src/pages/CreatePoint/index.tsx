@@ -27,9 +27,18 @@ const CreatePoint = () => {
   const [stateInitials, setStateInitials] = useState<string[]>([]);
   const [cityName, setCityName] = useState<string[]>([]);
 
+  const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
   const [selectedState, setSelectedState] = useState("0");
   const [selectedCity, setSelectedCity] = useState("0");
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+
+      setInitialPosition([latitude, longitude]);
+    });
+  }, []);
 
   useEffect(() => {
     api.get("items")
@@ -113,7 +122,7 @@ const CreatePoint = () => {
             <h2>Address</h2>
             <span>Select the map address</span>
           </legend>
-          <Map center={[-23.5630994, -46.6565712]} zoom={15} onClick={handleMapClick}>
+          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
