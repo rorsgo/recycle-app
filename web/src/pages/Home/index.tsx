@@ -2,6 +2,7 @@ import React from 'react';
 import logo from "../../assets/logo.svg";
 import "./styles.css";
 import { FiLogIn } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -14,12 +15,12 @@ const Home = () => {
           <h1>Your collection waste localized.</h1>
           <p>We help people find collection points efficiently.</p>
 
-          <a href="/register">
+          <Link to="/register-point">
             <span>
               <FiLogIn />
             </span>
             <strong>Register collection point</strong>
-          </a>
+          </Link>
         </main>
       </div>
     </div>
