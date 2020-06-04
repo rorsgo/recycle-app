@@ -19,7 +19,7 @@ const Home = () => {
             <span>
               <FiLogIn />
             </span>
-            <strong>Register collection point</strong>
+            <strong>Register collection waste point</strong>
           </Link>
         </main>
       </div>
