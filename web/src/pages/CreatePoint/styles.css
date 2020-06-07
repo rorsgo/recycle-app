@@ -56,15 +56,25 @@
   margin-bottom: 40px;
 }
 
+#page-create-point form legend:nth-of-type(1){
+  width: 100%;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
 #page-create-point form legend h2 {
   font-size: 24px;
+  display: inline;
 }
 
 #page-create-point form legend span {
-  float: inline-end;
+  float: right;
   font-size: 14px;
   font-weight: normal;
   color: var(--text-color);
+  display: block;
 }
 
 #page-create-point form .field-group {
@@ -112,6 +122,11 @@
 #page-create-point form .field label {
   font-size: 14px;
   margin: 13px 0 8px 0;
+}
+
+#page-create-point form .field label:nth-of-type(1){
+  font-size: 14px;
+  margin: 50px 0 8px 0;
 }
 
 #page-create-point form .field :disabled {
