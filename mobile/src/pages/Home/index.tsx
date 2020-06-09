@@ -1,11 +1,30 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { Feather as Icon } from "@expo/vector-icons"
+import { StyleSheet, View, Image, Text, ImageBackground } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+    source={require("../../assets/home-background.png")} 
+    style={styles.container}
+    imageStyle={{width: 274, height: 368 }}>
+      <View style={styles.main}>
       <Image source={require("../../assets/logo.png")}/>
-    </View>
+      <Text style={styles.title}>Your collection waste localized</Text>
+      <Text style={styles.description}>We help people find collection points efficiently.</Text>
+      </View>
+      <View style={styles.footer}>
+        <RectButton style={styles.button} onPress={() => {}}>
+          <View style={styles.buttonIcon}>
+            <Icon name="arrow-right" color="#FFFFFF" size={24} />
+          </View>
+          <Text style={styles.buttonText}>
+            Access
+          </Text>
+        </RectButton>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -13,6 +32,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 32,
+    backgroundColor: "#F0F0F5",
   },
 
   main: {
