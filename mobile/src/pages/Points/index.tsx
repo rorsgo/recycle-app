@@ -15,6 +15,7 @@ interface Item {
 
 const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
   useEffect(() => {
     api.get("items").then(response => {
       setItems(response.data);
@@ -23,8 +24,19 @@ const Points = () => {
 
   const navigation = useNavigation();
 
+  function handleSelectItem(id: number) {
+    const alreadySelected = selectedItems.findIndex(item => item === id);
+
+    if (alreadySelected >= 0) {
+      const filteredItems = selectedItems.filter(item => item !== id);
+      setSelectedItems(filteredItems);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  }
+
   function backToHome() {
-    navigation.goBack;
+    navigation.goBack();
   }
 
   function navigationToDetail() {
@@ -71,9 +83,16 @@ const Points = () => {
             paddingHorizontal: 20
           }}>
           {items.map(item => (
-            <TouchableOpacity key={String(item.id)} style={styles.item} onPress={() => { }}>
+            <TouchableOpacity
+              key={String(item.id)}
+              style={
+                [
+                  styles.item,
+                  selectedItems.includes(item.id) ? styles.selectedItem : {}]}
+              onPress={() => handleSelectItem(item.id)}
+              activeOpacity={0.6}>
               <SvgFromUri width={42} height={42} uri={item.image_url} />
-          <Text style={styles.itemTitle}>{item.title}</Text>
+              <Text style={styles.itemTitle}>{item.title}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
