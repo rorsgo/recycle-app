@@ -84,8 +84,8 @@ const Points = () => {
     navigation.goBack();
   }
 
-  function navigationToDetail() {
-    navigation.navigate("Detail");
+  function navigationToDetail(id: number) {
+    navigation.navigate("Detail", { pointID: id});
   }
 
   return (
@@ -111,7 +111,7 @@ const Points = () => {
                 <Marker
                   key={String(point.id)}
                   style={styles.mapMarker}
-                  onPress={navigationToDetail}
+                  onPress={() => navigationToDetail(point.id)}
                   coordinate={{
                     latitude: point.latitude,
                     longitude: point.longitude
