@@ -14,6 +14,7 @@ interface RouteParam {
 interface ParamData {
   point: {
     image: string;
+    image_url: string;
     name: string;
     email: string;
     state: string;
@@ -58,7 +59,7 @@ const Detail = () => {
           <Icon name="arrow-left" size={20} color="#34CB79" />
         </TouchableOpacity>
 
-        <Image style={styles.pointImage} source={{ uri: paramData.point.image }} />
+        <Image style={styles.pointImage} source={{ uri: paramData.point.image_url }} />
         <Text style={styles.pointName}>{paramData.point.name}</Text>
         <Text style={styles.pointItems}>
           {paramData.items.map(item => item.title).join(", ")}
