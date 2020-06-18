@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Feather as Icon } from "@expo/vector-icons"
 import { StyleSheet, View, Image, Text, ImageBackground, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import RNPickerSelect, { defaultStyles } from "react-native-picker-select";
+import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
