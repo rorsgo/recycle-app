@@ -5,12 +5,16 @@ import multerConfig from "./config/multer";
 import { celebrate, Joi } from "celebrate";
 import PointsController from "./controllers/PointsController";
 import ItemsController from "./controllers/ItemsController";
+import LocationController from "./controllers/LocationController";
 
 const routes = express.Router();
 const uploads = multer(multerConfig);
 
 const pointsController = new PointsController();
 const itemsController = new ItemsController();
+const locationController = new LocationController();
+
+routes.post("/location", locationController.loadLocation)
 
 routes.get("/items", itemsController.listItems);
 
