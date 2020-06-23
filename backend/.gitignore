@@ -3,3 +3,6 @@ node_modules/
 
 #Test Database
 backend/src/database/*.sqlite
+
+#Enviroment Variables
+.env
