@@ -1,5 +1,7 @@
-const NodeGeocoder = require("node-geocoder");
-require("dotenv").config();
+import NodeGeocoder from "node-geocoder";
+import { config } from "dotenv";
+
+config();
 
 const options = {
   provider: process.env.PROVIDER,
@@ -10,4 +12,4 @@ const options = {
 
 const geocoder = NodeGeocoder(options);
 
-module.exports = geocoder;
+export default geocoder;
