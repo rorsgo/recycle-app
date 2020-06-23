@@ -118,17 +118,17 @@ const CreatePoint = () => {
     const items = selectedItems;
 
     const data = new FormData();
-      data.append("name", name);
-      data.append("email", email);
-      data.append("state", state);
-      data.append("city", city);
-      data.append("latitude", String(latitude));
-      data.append("longitude", String(longitude));
-      data.append("items", items.join(","));
-      if (selectedFile){
-        data.append("image", selectedFile)
-      }
-      
+    data.append("name", name);
+    data.append("email", email);
+    data.append("state", state);
+    data.append("city", city);
+    data.append("latitude", String(latitude));
+    data.append("longitude", String(longitude));
+    data.append("items", items.join(","));
+    if (selectedFile) {
+      data.append("image", selectedFile)
+    }
+
     await api.post("points", data);
     alert("Point Regitered!");
     history.push("/");
@@ -146,7 +146,7 @@ const CreatePoint = () => {
       <form onSubmit={handleSubmit}>
         <h1>Register a collection waste point</h1>
 
-        <Dropzone onFileUploaded={setSelectedFile}/>
+        <Dropzone onFileUploaded={setSelectedFile} />
 
         <fieldset>
           <legend>
@@ -175,14 +175,8 @@ const CreatePoint = () => {
         <fieldset>
           <legend>
             <h2>Address</h2>
-            <span>Select the map address</span>
+            <span>Fill the map address</span>
           </legend>
-          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
-            <TileLayer
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={selectedPosition} />
-          </Map>
           <div className="field-group">
             <div className="field">
               <label htmlFor="state">State</label>
@@ -203,6 +197,26 @@ const CreatePoint = () => {
               </select>
             </div>
           </div>
+          <div className="field-group">
+            <div className="field">
+              <label htmlFor="zipcode">ZipCode</label>
+              <input
+                type="number"
+                name="zipcode"
+                id="zipcode"
+              // onChange={handleInputChange}
+              />
+            </div>
+            <div className="field">
+              <button type="submit">Load</button>
+            </div>
+          </div>
+          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={selectedPosition} />
+          </Map>
         </fieldset>
 
         <fieldset>
@@ -224,7 +238,7 @@ const CreatePoint = () => {
         </fieldset>
         <button type="submit">Register point</button>
       </form>
-    </div>
+    </div >
   );
 };
 
