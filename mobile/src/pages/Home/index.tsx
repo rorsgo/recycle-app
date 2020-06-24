@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { Feather as Icon } from "@expo/vector-icons"
 import { StyleSheet, View, Image, Text, ImageBackground, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
@@ -75,7 +75,7 @@ const Home = () => {
             useNativeAndroidPickerStyle={false}
             style={pickerSelectStyles}
             placeholder={{
-              label: "Select a state"
+              label: "Select a state",
             }}
             value={state}
             Icon={() => {
@@ -131,6 +131,7 @@ const Home = () => {
               label: city,
               value: city
             }))} />
+            <TextInput style={styles.input} placeholder={"ZipCode"} keyboardType={"number-pad"} />
           <RectButton style={styles.button} onPress={navigationToPoints}>
             <View style={styles.buttonIcon}>
               <Icon name="arrow-right" color="#FFFFFF" size={24} />
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: 'center',
+    marginTop: 50
   },
 
   title: {
@@ -161,24 +163,37 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: 'Ubuntu_700Bold',
     maxWidth: 260,
-    marginTop: 64,
+    marginTop: 40,
   },
 
   description: {
     color: '#6C6C80',
     fontSize: 16,
-    marginTop: 16,
+    marginTop: 5,
     fontFamily: 'Roboto_400Regular',
     maxWidth: 260,
     lineHeight: 24,
+    marginBottom: 40
   },
 
   input: {
-    height: 60,
-    borderRadius: 10,
+    height: 46,
+    borderRadius: 8,
     marginBottom: 8,
     paddingHorizontal: 24,
     fontSize: 16,
+    backgroundColor: 'transparent',
+    borderColor: 'gray',
+    borderTopWidth: 0.9,
+    borderBottomWidth: 0.9,
+    borderRightWidth: 0.8,
+    borderLeftWidth: 0.8,
+    borderWidth: 1,
+    color: '#322153',
+    fontWeight: "bold",
+    marginVertical: 10,
+    paddingVertical: 8,
+    paddingLeft: 10, // to ensure the text is never behind the icon
   },
 
   button: {
