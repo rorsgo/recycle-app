@@ -1,13 +1,11 @@
 #page-create-point {
   width: 100%;
   max-width: 1100px;
-
   margin: 0 auto;
 }
 
 #page-create-point header {
   margin-top: 48px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +15,6 @@
   color: var(--title-color);
   font-weight: bold;
   text-decoration: none;
-
   display: flex;
   align-items: center;
 }
@@ -33,7 +30,6 @@
   max-width: 730px;
   background: #FFF;
   border-radius: 8px;
-
   display: flex;
   flex-direction: column;
 }
@@ -56,14 +52,6 @@
   margin-bottom: 40px;
 }
 
-#page-create-point form legend:nth-of-type(1){
-  width: 100%;
-  display: block;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-}
-
 #page-create-point form legend h2 {
   font-size: 24px;
   display: inline;
@@ -77,6 +65,24 @@
   display: block;
 }
 
+#page-create-point form fieldset span {
+  float: right;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--text-color);
+  display: block;
+  margin-top: -20px;
+}
+
+#page-create-point form fieldset:nth-of-type(2) span:nth-child(1) {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--text-color);
+  display: flex;
+  position: relative;
+  margin-top: -390px;
+}
+
 #page-create-point form .field-group {
   flex: 1;
   display: flex;
@@ -84,7 +90,6 @@
 
 #page-create-point form .field {
   flex: 1;
-
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
@@ -164,7 +169,8 @@
   width: 100%;
   height: 350px;
   border-radius: 8px;
-  margin-top: 35px;
+  margin-top: 80px;
+  display: -webkit-box;
 }
 
 #page-create-point form button {
@@ -199,21 +205,17 @@
   height: 180px;
   border-radius: 8px;
   padding: 32px 24px 16px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
   text-align: center;
-
   cursor: pointer;
 }
 
 .items-grid li span {
   flex: 1;
   margin-top: 12px;
-
   display: flex;
   align-items: center;
   color: var(--title-color)

@@ -37,17 +37,18 @@ const CreatePoint = () => {
   });
   const [selectedState, setSelectedState] = useState("0");
   const [selectedCity, setSelectedCity] = useState("0");
+  const [inputedZipCode, setZipCode] = useState("0");
   const [selectedFile, setSelectedFile] = useState<File>();
   const history = useHistory();
 
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords;
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     const { latitude, longitude } = position.coords;
 
-      setInitialPosition([latitude, longitude]);
-    });
-  }, []);
+  //     setInitialPosition([latitude, longitude]);
+  //   });
+  // }, []);
 
   useEffect(() => {
     api.get("items")
@@ -56,11 +57,16 @@ const CreatePoint = () => {
       })
   }, []);
 
+  // useEffect(() => {
+
+  // }, [handleLocation])
+
   useEffect(() => {
     axios.get<IBGEStateResponse[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
       .then(response => {
         const stateInitials = response.data.map(state => state.sigla);
-        setStateInitials(stateInitials);
+        const alphabeticStateInitials = stateInitials.sort();
+        setStateInitials(alphabeticStateInitials);
       })
   }, []);
 
@@ -97,6 +103,11 @@ const CreatePoint = () => {
     setFormData({ ...formData, [name]: value });
   }
 
+  function handleZipCode(event: ChangeEvent<HTMLInputElement>) {
+    const zipCode = event.target.value;
+    setZipCode(zipCode);
+  }
+
   function handleSelectItem(id: number) {
     const alreadySelectedItems = selectedItems.findIndex(item => item === id);
 
@@ -106,6 +117,23 @@ const CreatePoint = () => {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
+  }
+
+  async function handleLocation(event: FormEvent) {
+    event.preventDefault();
+    const zipCode = inputedZipCode;
+    const state = selectedState;
+    const city = selectedCity;
+
+    const data = {
+      zipCode,
+      state,
+      city
+    }
+
+    const location = await api.post("location", data);
+    setInitialPosition([location.data.latitude, location.data.longitude]);
+    setSelectedPosition([location.data.latitude, location.data.longitude]);
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -145,33 +173,31 @@ const CreatePoint = () => {
       </header>
       <form onSubmit={handleSubmit}>
         <h1>Register a collection waste point</h1>
-
         <Dropzone onFileUploaded={setSelectedFile} />
-
         <fieldset>
           <legend>
             <h2>Data</h2>
-            <div className="field">
-              <label htmlFor="name">Entity name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="email">E-mail</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                onChange={handleInputChange}
-              />
-            </div>
+            <span>Fill the blanks with the point waste information</span>
           </legend>
+          <div className="field">
+            <label htmlFor="name">Entity name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="email">E-mail</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              onChange={handleInputChange}
+            />
+          </div>
         </fieldset>
-
         <fieldset>
           <legend>
             <h2>Address</h2>
@@ -189,7 +215,11 @@ const CreatePoint = () => {
             </div>
             <div className="field">
               <label htmlFor="city">City</label>
-              <select name="city" id="city" value={selectedCity} onChange={handleSelectCity}>
+              <select
+                name="city"
+                id="city"
+                value={selectedCity}
+                onChange={handleSelectCity}>
                 <option value="0">Select a city</option>
                 {cityName.map(city => (
                   <option key={city} value={city}>{city}</option>
@@ -201,24 +231,27 @@ const CreatePoint = () => {
             <div className="field">
               <label htmlFor="zipcode">ZipCode</label>
               <input
-                type="number"
+                type="text"
+                maxLength={8}
                 name="zipcode"
                 id="zipcode"
-              // onChange={handleInputChange}
+                onChange={handleZipCode}
               />
             </div>
             <div className="field">
-              <button type="submit">Load</button>
+              <button type="submit" onClick={handleLocation}>Load</button>
             </div>
           </div>
-          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
+          <legend>
+            <span>Navigate and select a specific location on the map</span>
+          </legend>
+          <Map center={initialPosition} zoom={16} onClick={handleMapClick}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={selectedPosition} />
           </Map>
         </fieldset>
-
         <fieldset>
           <legend>
             <h2>Collection Items</h2>

@@ -4,7 +4,6 @@ import geocoder from "./utils/geocoder";
 class LocationController {
   async loadLocation(request: Request, response: Response) {
     const { state, city, zipCode } = request.body;
-    console.log(state, city, zipCode);
 
     const geoLocation = await geocoder.geocode({
       address: `${zipCode}, ${city}, ${state}`
