@@ -19,6 +19,7 @@ const Home = () => {
   const [stateInitials, setStateInitials] = useState<string[]>([]);
   const [city, setCity] = useState("0");
   const [selectedCity, setSelectedCity] = useState<string[]>([]);
+  const [zipCode, setZipCode] = useState("");
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -40,20 +41,11 @@ const Home = () => {
       })
   }, [state]);
 
-  function handleSelectedState(event: ChangeEvent<HTMLSelectElement>) {
-    const stateInitial = event.target.value;
-    setState(stateInitial);
-  }
-
-  function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
-    const cityName = event.target.value;
-    setCity(cityName);
-  }
-
   function navigationToPoints() {
     navigation.navigate("Points", {
       state,
-      city
+      city,
+      zipCode
     });
   }
 
@@ -131,7 +123,14 @@ const Home = () => {
               label: city,
               value: city
             }))} />
-            <TextInput style={styles.input} placeholder={"ZipCode"} keyboardType={"number-pad"} />
+          <TextInput
+            style={styles.input}
+            maxLength={8}
+            placeholder={"ZipCode"}
+            keyboardType={"number-pad"}
+            value={zipCode}
+            onChangeText={setZipCode}
+          />
           <RectButton style={styles.button} onPress={navigationToPoints}>
             <View style={styles.buttonIcon}>
               <Icon name="arrow-right" color="#FFFFFF" size={24} />
