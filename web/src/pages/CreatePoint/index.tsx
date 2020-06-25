@@ -41,25 +41,12 @@ const CreatePoint = () => {
   const [selectedFile, setSelectedFile] = useState<File>();
   const history = useHistory();
 
-
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(position => {
-  //     const { latitude, longitude } = position.coords;
-
-  //     setInitialPosition([latitude, longitude]);
-  //   });
-  // }, []);
-
   useEffect(() => {
     api.get("items")
       .then(response => {
         setItems(response.data);
       })
   }, []);
-
-  // useEffect(() => {
-
-  // }, [handleLocation])
 
   useEffect(() => {
     axios.get<IBGEStateResponse[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
