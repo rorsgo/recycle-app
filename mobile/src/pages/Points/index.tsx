@@ -26,6 +26,7 @@ interface Point {
 interface RouteParam {
   state: string;
   city: string;
+  zipCode: string;
 }
 
 const Points = () => {
@@ -37,14 +38,13 @@ const Points = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const routeParams = route.params as RouteParam;
-
+  const {city, state, zipCode} = route.params as RouteParam;
 
   useEffect(() => {
     api.get("points", {
       params: {
-        state: routeParams.state,
-        city: routeParams.city,
+        state: state,
+        city: city,
         items: selectedItems
       }
     }).then(response => {
@@ -60,19 +60,33 @@ const Points = () => {
 
   useEffect(() => {
     async function loadPosition() {
-      const { status } = await Location.requestPermissionsAsync();
+      if (state === "0" && city === "0" || state === "undefined" && city === "undefined") {
+        const { status } = await Location.requestPermissionsAsync();
 
-      if (status !== "granted") {
-        Alert.alert("Ops!", "We need your permission to load your position.")
-        return;
+        if (status !== "granted") {
+          Alert.alert("Ops!", "We need the location permission to load your position.")
+          return;
+        }
+
+        const userLocation = await Location.getCurrentPositionAsync();
+        const { latitude, longitude } = userLocation.coords;
+
+        setInitialPosition([
+          latitude,
+          longitude
+        ]);
       }
 
-      const userLocation = await Location.getCurrentPositionAsync();
-      const { latitude, longitude } = userLocation.coords;
+      const data = {
+        city,
+        state,
+        zipCode
+      }
 
+      const location = await api.post("location", data);
       setInitialPosition([
-        latitude,
-        longitude
+        location.data.latitude,
+        location.data.longitude
       ]);
     }
 
@@ -95,7 +109,7 @@ const Points = () => {
   }
 
   function navigationToDetail(id: number) {
-    navigation.navigate("Detail", { pointID: id});
+    navigation.navigate("Detail", { pointID: id });
   }
 
   return (
@@ -114,8 +128,8 @@ const Points = () => {
               initialRegion={{
                 latitude: initialPosition[0],
                 longitude: initialPosition[1],
-                latitudeDelta: 0.006,
-                longitudeDelta: 0.006
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01
               }}>
               {points.map(point => (
                 <Marker

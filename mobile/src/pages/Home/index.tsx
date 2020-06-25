@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { Feather as Icon } from "@expo/vector-icons"
 import { StyleSheet, View, Image, Text, ImageBackground, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
@@ -26,7 +26,7 @@ const Home = () => {
     axios.get<IBGEStateResponse[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
       .then(response => {
         const stateInitials = response.data.map(state => state.sigla);
-        setStateInitials(stateInitials);
+        setStateInitials(stateInitials.sort());
       })
   }, []);
 
