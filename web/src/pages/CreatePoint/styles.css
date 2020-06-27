@@ -74,6 +74,15 @@
   margin-top: -20px;
 }
 
+#page-create-point form li span {
+  float: right;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--text-color);
+  display: block;
+  margin-top: 20px;
+}
+
 #page-create-point form fieldset:nth-of-type(2) span:nth-child(1) {
   font-size: 14px;
   font-weight: normal;
