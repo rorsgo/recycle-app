@@ -5,6 +5,11 @@ import { RectButton } from "react-native-gesture-handler";
 import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import styles from "./styles";
+import pickerSelectStyles from "./components/pickerSelectStyles";
+import selectIconStyle from "./components/selectIconStyles";
+
+const selectIcon = Object.assign(selectIconStyle);
 
 interface IBGEStateResponse {
   sigla: string;
@@ -12,9 +17,11 @@ interface IBGEStateResponse {
 
 interface IBGECityResponse {
   nome: string;
-}
+} 
 
 const Home = () => {
+
+
   const [state, setState] = useState("0");
   const [stateInitials, setStateInitials] = useState<string[]>([]);
   const [city, setCity] = useState("0");
@@ -72,20 +79,7 @@ const Home = () => {
             value={state}
             Icon={() => {
               return (
-                <View
-                  style={{
-                    position: 'absolute',
-                    backgroundColor: 'transparent',
-                    borderTopWidth: 10,
-                    borderTopColor: 'gray',
-                    borderRightWidth: 10,
-                    borderRightColor: 'transparent',
-                    borderLeftWidth: 10,
-                    borderLeftColor: 'transparent',
-                    marginVertical: 30,
-                    marginHorizontal: -35
-                  }}
-                />
+                <View style={selectIcon} />
               );
             }}
             onValueChange={state => setState(state)}
@@ -102,20 +96,7 @@ const Home = () => {
             value={city}
             Icon={() => {
               return (
-                <View
-                  style={{
-                    position: 'absolute',
-                    backgroundColor: 'transparent',
-                    borderTopWidth: 10,
-                    borderTopColor: 'gray',
-                    borderRightWidth: 10,
-                    borderRightColor: 'transparent',
-                    borderLeftWidth: 10,
-                    borderLeftColor: 'transparent',
-                    marginVertical: 30,
-                    marginHorizontal: -35
-                  }}
-                />
+                <View style={selectIcon} />
               );
             }}
             onValueChange={city => setCity(city)}
@@ -144,110 +125,5 @@ const Home = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 32,
-  },
-
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 50
-  },
-
-  title: {
-    color: '#322153',
-    fontSize: 32,
-    fontFamily: 'Ubuntu_700Bold',
-    maxWidth: 260,
-    marginTop: 40,
-  },
-
-  description: {
-    color: '#6C6C80',
-    fontSize: 16,
-    marginTop: 5,
-    fontFamily: 'Roboto_400Regular',
-    maxWidth: 260,
-    lineHeight: 24,
-    marginBottom: 40
-  },
-
-  input: {
-    height: 46,
-    borderRadius: 8,
-    marginBottom: 8,
-    paddingHorizontal: 24,
-    fontSize: 16,
-    backgroundColor: 'transparent',
-    borderColor: 'gray',
-    borderTopWidth: 0.9,
-    borderBottomWidth: 0.9,
-    borderRightWidth: 0.8,
-    borderLeftWidth: 0.8,
-    borderWidth: 1,
-    color: '#322153',
-    fontWeight: "bold",
-    marginVertical: 10,
-    paddingVertical: 8,
-    paddingLeft: 10, // to ensure the text is never behind the icon
-  },
-
-  button: {
-    backgroundColor: '#34CB79',
-    height: 60,
-    flexDirection: 'row',
-    borderRadius: 10,
-    overflow: 'hidden',
-    alignItems: 'center',
-    marginTop: 8,
-  },
-
-  buttonIcon: {
-    height: 60,
-    width: 60,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  buttonText: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    color: '#FFF',
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 16,
-  }
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: '#322153',
-    fontWeight: "bold",
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: '#999999',
-    borderRadius: 8,
-    color: '#322153',
-    fontWeight: "bold",
-    paddingRight: 30, // to ensure the text is never behind the icon
-    marginBottom: 10,
-    marginVertical: 10
-  },
-});
 
 export default Home;

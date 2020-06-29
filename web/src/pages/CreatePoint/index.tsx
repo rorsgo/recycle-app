@@ -52,8 +52,7 @@ const CreatePoint = () => {
     axios.get<IBGEStateResponse[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
       .then(response => {
         const stateInitials = response.data.map(state => state.sigla);
-        const alphabeticStateInitials = stateInitials.sort();
-        setStateInitials(alphabeticStateInitials);
+        setStateInitials(stateInitials.sort());
       })
   }, []);
 
