@@ -8,7 +8,8 @@ class ItemsController {
       return {
         id: item.id,
         title: item.title,
-        image_url: `http://10.0.2.2:3333/uploads/${item.image}` //localhost to android simulator
+        // If you are using Android Studio Emulator check the valid IP adresses to localhost
+        image_url: `http://127.0.0.1:3333/uploads/${item.image}` 
       }
     });
     return response.json(serializedItems);
