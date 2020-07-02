@@ -178,7 +178,7 @@
   width: 100%;
   height: 350px;
   border-radius: 8px;
-  display: -webkit-box;
+  position: sticky !important;
 }
 
 #page-create-point form button {

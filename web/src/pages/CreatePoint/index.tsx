@@ -9,6 +9,7 @@ import axios from "axios";
 import api from "../../services/api";
 
 import Dropzone from "../../components/Dropzone";
+import SuccessModal from "../../components/SuccessModal";
 
 interface Item {
   id: number;
@@ -39,6 +40,7 @@ const CreatePoint = () => {
   const [selectedCity, setSelectedCity] = useState("0");
   const [inputedZipCode, setZipCode] = useState("0");
   const [selectedFile, setSelectedFile] = useState<File>();
+  const [isSuccess, setSuccess] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -122,6 +124,13 @@ const CreatePoint = () => {
     setSelectedPosition([location.data.latitude, location.data.longitude]);
   }
 
+  function handleModalClose() {
+    setTimeout(() => {
+      setSuccess(false);
+      history.push("/");
+    }, 4000);
+  }
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
@@ -144,8 +153,12 @@ const CreatePoint = () => {
     }
 
     await api.post("points", data);
-    alert("Point Regitered!");
-    history.push("/");
+    setSuccess(true);
+
+    setTimeout(() => {
+      history.push("/");
+      setSuccess(false);
+    }, 2000)
   }
 
   return (
@@ -158,6 +171,10 @@ const CreatePoint = () => {
         </Link>
       </header>
       <form onSubmit={handleSubmit}>
+        <SuccessModal
+          isOpen={isSuccess}
+          closed={handleModalClose}
+        />
         <h1>Register a collection waste point</h1>
         <Dropzone onFileUploaded={setSelectedFile} />
         <fieldset>
