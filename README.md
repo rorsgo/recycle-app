@@ -142,7 +142,7 @@ yarn start
 
 ## **Credits**
 
-- Author: Rodrigo Santos [@rorvts](https://www.linkedin.com/in/rorvts/)
+- Author: Rodrigo Santos [@rorsgo](https://www.linkedin.com/in/rorsgo/)
 - Based on: [Ecoleta](https://github.com/Rocketseat/nlw-01-booster)
 
 ## **License**
