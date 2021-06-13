@@ -16,10 +16,10 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub issues" src="https://img.shields.io/github/issues/rorvts/RecycleApp">
-  <img alt="GitHub forks" src="https://img.shields.io/github/forks/rorvts/RecycleApp">
-  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/rorvts/RecycleApp/total">
-  <img alt="GitHub" src="https://img.shields.io/github/license/rorvts/RecycleApp">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/rorsgo/RecycleApp">
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/rorsgo/RecycleApp">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/rorsgo/RecycleApp/total">
+  <img alt="GitHub" src="https://img.shields.io/github/license/rorsgo/RecycleApp">
 </p>
 
 ### **Problem**
@@ -56,7 +56,7 @@ Recycle App is an open source software that allows users to register and view co
 ### **Download**
 
 ```
-git clone https://github.com/rorvts/RecycleApp.git
+git clone https://github.com/rorsgo/RecycleApp.git
 ```
 
 ### **Install**
