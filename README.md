@@ -16,10 +16,10 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub issues" src="https://img.shields.io/github/issues/rorsgo/RecycleApp">
-  <img alt="GitHub forks" src="https://img.shields.io/github/forks/rorsgo/RecycleApp">
-  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/rorsgo/RecycleApp/total">
-  <img alt="GitHub" src="https://img.shields.io/github/license/rorsgo/RecycleApp">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/rorsgo/recycle-app">
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/rorsgo/recycle-app">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/rorsgo/recycle-app/total">
+  <img alt="GitHub" src="https://img.shields.io/github/license/rorsgo/recycle-app">
 </p>
 
 ### **Problem**
